@@ -10,6 +10,7 @@ FOR /F "tokens=*" %%h IN ('dir .\upload /B') do (
  move .\upload\%%h .\images\!i!.jpg
  set /a i=!i!+1
 )
+echo %i%>images.txt
 endlocal
 echo Files moved and renamed!
 pause
