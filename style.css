@@ -1,65 +1,87 @@
 body {
 	padding: 0;
 	margin: 0;
+	width: 100vw;
+	background: #242424;
+	background-image: url("lion.png");
+	animation: bg-scroll 2000s linear infinite;
+	background-size: 10%;
+	overflow-x: hidden;
+}
+@keyframes bg-scroll {
+	0% {background-position: 0px 0px}
+	100% {background-position: 17320px -10000px}
 }
 
 #debug {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
-	color: white;
+	background: white;
 	font-size: 20px;
 	z-index: 1000;
 }
 
 div.header {
-	background: blue;
-	width: 100%;
-}
-body.landscape div.header {
-	height: 7vh;
-	padding: 2vh;
-}
-body.portrait div.header {
-	height: 7vw;
-	padding: 2vw;
+	width: 100vw;
+	height: 3vw;
+	padding-top: 1vw;
+	padding-left: 1vw;
+	padding-bottom: 1vw;
+	background: #00529B;
+	border-bottom: 4px solid #00417a
 }
 
 div.header div.titletext {
 	font-family: Roboto;
 	font-weight: 100;
 	color: white;
-	background: purple;
 	height: 100%;
 	vertical-align: middle;
-}
-body.landscape div.header div.titletext {
-	font-size: 5.5vh;
-}
-body.portrait div.header div.titletext {
-	font-size: 5.5vw;
+	font-size: 2.5vw;
 }
 
-div.jsimages {
-	width: fit-content;
+div#jsimages {
+	display: table;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
 div.imgcolumn {
+	padding-top: 20px;
 	display: inline-block;
 	vertical-align: top;
-	border: 1px dotted red;
+	/* outline: 1px dotted red; */
 	height: fit-content;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 	box-sizing: border-box;
 }
 div.imgcolumn img {
 	width: 100%;
 	display: block;
 	margin-bottom: 20px;
-	border-radius: 15px;
-	box-sizing: border-box;
+	border-radius: 20px;
+	cursor: pointer;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	border: 2px solid black;
+	background: black;
+}
+div.imgcolumn img:hover {
+	border: 2px solid #00529B;
+	background: #00529B;
+	box-shadow: 0px 0px 10px 3px #00529B;
+}
+
+#loader {
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 10vh;
+	/* background: rgba(255,255,0,0.5); */
+}
+#loader.hidden {
 }
