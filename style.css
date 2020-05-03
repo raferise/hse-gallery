@@ -1,0 +1,65 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#debug {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: white;
+	font-size: 20px;
+	z-index: 1000;
+}
+
+div.header {
+	background: blue;
+	width: 100%;
+}
+body.landscape div.header {
+	height: 7vh;
+	padding: 2vh;
+}
+body.portrait div.header {
+	height: 7vw;
+	padding: 2vw;
+}
+
+div.header div.titletext {
+	font-family: Roboto;
+	font-weight: 100;
+	color: white;
+	background: purple;
+	height: 100%;
+	vertical-align: middle;
+}
+body.landscape div.header div.titletext {
+	font-size: 5.5vh;
+}
+body.portrait div.header div.titletext {
+	font-size: 5.5vw;
+}
+
+div.jsimages {
+	width: fit-content;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+div.imgcolumn {
+	display: inline-block;
+	width: 300px;
+	border: 1px dotted red;
+	height: 100vh;
+	padding-left: 5px;
+	padding-right: 5px;
+	box-sizing: border-box;
+}
+div.imgcolumn img {
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+	border-radius: 15px;
+	box-sizing: border-box;
+}
