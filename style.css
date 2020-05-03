@@ -5,7 +5,7 @@ body {
 	background: #242424;
 	background-image: url("lion.png");
 	animation: bg-scroll 2000s linear infinite;
-	background-size: 10%;
+	background-size: 20%;
 	overflow-x: hidden;
 }
 @keyframes bg-scroll {
