@@ -53,7 +53,7 @@ function onWindowResize() {
 	var [vw, vh] = getViewport();
 	debug(vw,0);
 	var COLUMN_WIDTH;
-	if (vw >= 1000) {
+	if (vw >= 950) {
 		 COLUMN_WIDTH = 300;
 	} else if (vw >= 771) {
 		COLUMN_WIDTH = 250;
