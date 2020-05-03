@@ -25,6 +25,10 @@ function getViewport() {
  return [viewPortWidth, viewPortHeight];
 }
 
+function debug(txt,index) {
+	document.getElementById('debug').children[index].innerHTML = txt;
+}
+
 function getSmallestImageColumn() {
 	var jsimages = document.getElementById('jsimages');
 	var minheight = jsimages.children[0].offsetHeight;
@@ -47,7 +51,7 @@ function createImageElement(img) {
 
 function onWindowResize() {
 	var [vw, vh] = getViewport();
-	document.getElementById('debug').children[0].innerHTML = vw;
+	debug(vw,0);
 	var COLUMN_WIDTH;
 	if (vw >= 1000) {
 		 COLUMN_WIDTH = 300;
@@ -68,52 +72,72 @@ function onWindowResize() {
 		jsimages.appendChild(col);
 	}
 	for (var i=0; i<ImagesList.length; i++) {
-		getSmallestImageColumn().appendChild(createImageElement(ImagesList[i]));
+		getSmallestImageColumn().appendChild(ImagesList[i]);
 	}
 	var loader = document.createElement('div');
 		loader.id = "loader";
 	jsimages.appendChild(loader);
 	observer.observe(loader);
 }
+var ImagesCount;
 window.addEventListener('resize', onWindowResize);
-window.addEventListener('load', onWindowResize);
-
-var ImagesList = [];
-var imagesloading = 0;
-var raincheck = true;
-
-function loadImage(imgnum){
-	document.getElementById('debug').children[1].innerHTML = imagesloading;
-	var img = new Image();
-	img.onload = function() {
-		imagesloading--;
-		document.getElementById('debug').children[1].innerHTML = imagesloading;
-		getSmallestImageColumn().appendChild(createImageElement(img));
-		if (imagesloading > 0) {
-			loadImage(imgnum+1);
-		} else {
-			if (raincheck) {
+window.addEventListener('load', function() {
+	onWindowResize();
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", "./images.txt", false);
+	rawFile.onreadystatechange = function ()
+	{
+		if(rawFile.readyState === 4)
+		{
+			if(rawFile.status === 200 || rawFile.status == 0)
+			{
+				ImagesCount = parseInt(rawFile.responseText);
 				loadNext();
-				raincheck = false;
-				document.getElementById('debug').children[2].innerHTML = raincheck;
 			}
 		}
 	}
-	ImagesList.push(img);
-	img.src = "./images/"+imgnum+".jpg";
+	rawFile.send(null);
+});
+
+var ImagesList = [];
+var imagesloading = 0;
+
+function loadImage(){
+	debug(imagesloading,1);
+	if (ImagesList.length < ImagesCount) {
+		var img = new Image();
+		img.onload = function() {
+			debug(imagesloading,1);
+			getSmallestImageColumn().appendChild(img);
+			if (imagesloading > 0) {
+				imagesloading--;
+				loadImage();
+			} else if (isLoaderVisible()) {
+				debug(true,2);
+				loadNext();
+			} else {
+				debug(false,2);
+			}
+		}
+		ImagesList.push(img);
+		img.src = "./images/"+(ImagesList.length-1)+".jpg";
+	}
 }
 function loadNext() {
 	if (imagesloading == 0) {
-		imagesloading = 6;
-		loadImage(ImagesList.length);
-	} else {
-		raincheck = true;
-		document.getElementById('debug').children[2].innerHTML = raincheck;
-	}	
+		imagesloading = 10;
+		loadImage();
+	}
 }
 let obsopts = {
   root: null,
   rootMargin: '0px',
-  threshold: [0.1, 0.5, 1]
+  threshold: [0,.25,.5,.75,1]
 }
 let observer = new IntersectionObserver(loadNext, obsopts);
+function isLoaderVisible() {
+    var rect = document.getElementById('loader').getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+    );
+}
