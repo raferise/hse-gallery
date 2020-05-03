@@ -80,6 +80,7 @@ window.addEventListener('load', onWindowResize);
 
 var ImagesList = [];
 var imagesloading = 0;
+var raincheck = false;
 
 function loadImage(imgnum){
 	var img = new Image();
@@ -88,6 +89,11 @@ function loadImage(imgnum){
 		getSmallestImageColumn().appendChild(createImageElement(img));
 		if (imagesloading > 0) {
 			loadImage(imgnum+1);
+		} else {
+			if (raincheck) {
+				loadNext();
+				raincheck = false;
+			}
 		}
 	}
 	ImagesList.push(img);
@@ -95,8 +101,10 @@ function loadImage(imgnum){
 }
 function loadNext() {
 	if (imagesloading == 0) {
-		imagesloading = 10
+		imagesloading = 25
 		loadImage(ImagesList.length);
+	} else {
+		raincheck = true;
 	}
 	
 }
