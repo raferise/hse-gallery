@@ -49,9 +49,9 @@ div.jsimages {
 
 div.imgcolumn {
 	display: inline-block;
-	width: 300px;
+	vertical-align: top;
 	border: 1px dotted red;
-	height: 100vh;
+	height: fit-content;
 	padding-left: 5px;
 	padding-right: 5px;
 	box-sizing: border-box;
