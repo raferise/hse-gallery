@@ -47,7 +47,7 @@ function createImageElement(img) {
 
 function onWindowResize() {
 	var [vw, vh] = getViewport();
-	document.getElementById('debug').innerHTML = vw;
+	document.getElementById('debug').children[0].innerHTML = vw;
 	var COLUMN_WIDTH;
 	if (vw >= 1000) {
 		 COLUMN_WIDTH = 300;
@@ -80,12 +80,14 @@ window.addEventListener('load', onWindowResize);
 
 var ImagesList = [];
 var imagesloading = 0;
-var raincheck = false;
+var raincheck = true;
 
 function loadImage(imgnum){
+	document.getElementById('debug').children[1].innerHTML = imagesloading;
 	var img = new Image();
 	img.onload = function() {
 		imagesloading--;
+		document.getElementById('debug').children[1].innerHTML = imagesloading;
 		getSmallestImageColumn().appendChild(createImageElement(img));
 		if (imagesloading > 0) {
 			loadImage(imgnum+1);
@@ -93,6 +95,7 @@ function loadImage(imgnum){
 			if (raincheck) {
 				loadNext();
 				raincheck = false;
+				document.getElementById('debug').children[2].innerHTML = raincheck;
 			}
 		}
 	}
@@ -101,16 +104,16 @@ function loadImage(imgnum){
 }
 function loadNext() {
 	if (imagesloading == 0) {
-		imagesloading = 25
+		imagesloading = 6;
 		loadImage(ImagesList.length);
 	} else {
 		raincheck = true;
-	}
-	
+		document.getElementById('debug').children[2].innerHTML = raincheck;
+	}	
 }
 let obsopts = {
   root: null,
   rootMargin: '0px',
-  threshold: 0.1
+  threshold: [0.1, 0.5, 1]
 }
 let observer = new IntersectionObserver(loadNext, obsopts);
