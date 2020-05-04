@@ -51,7 +51,6 @@ function createImageElement(img) {
 
 function onWindowResize() {
 	var [vw, vh] = getViewport();
-	debug(vw,0);
 	var COLUMN_WIDTH;
 	if (vw >= 950) {
 		 COLUMN_WIDTH = 300;
@@ -103,20 +102,15 @@ var ImagesList = [];
 var imagesloading = 0;
 
 function loadImage(){
-	debug(imagesloading,1);
 	if (ImagesList.length < ImagesCount) {
 		var img = new Image();
 		img.onload = function() {
-			debug(imagesloading,1);
 			getSmallestImageColumn().appendChild(img);
 			if (imagesloading > 0) {
 				imagesloading--;
 				loadImage();
 			} else if (isLoaderVisible()) {
-				debug(true,2);
 				loadNext();
-			} else {
-				debug(false,2);
 			}
 		}
 		ImagesList.push(img);
