@@ -113,6 +113,7 @@ div.imgcolumn img:hover {
 	width: 100%;
 	margin-top: -40vh;
 	height: 40vh;
+	visibility: hidden;
 	/* background: rgba(255,255,0,1); */
 }
 
