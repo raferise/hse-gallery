@@ -120,7 +120,8 @@ function loadImage(){
 			}
 		}
 		ImagesList.push(img);
-		img.src = "./images/"+(ImagesList.length-1)+".jpg";
+		img.src = "./thumbs/"+(ImagesList.length-1)+".jpg";
+		img.setAttribute("onClick","showFullsize("+(ImagesList.length-1)+")")
 	}
 }
 function loadNext() {
@@ -129,6 +130,24 @@ function loadNext() {
 		loadImage();
 	}
 }
+
+function showFullsize(imgnum) {
+	var backdrop = document.createElement('div');
+		backdrop.classList.add('backdrop');
+		backdrop.innerHTML = "Loading...";
+		backdrop.setAttribute('onClick','this.remove();');
+		var img = new Image();
+			img.onload = function() {
+				backdrop.appendChild(img);
+			}
+			img.setAttribute('onClick','event.stopPropagation();');
+			img.src = "./images/"+(imgnum)+".jpg";
+		var closebutton = document.createElement('button');
+			closebutton.innerHTML = " &times; ";
+		backdrop.appendChild(closebutton);
+	document.body.appendChild(backdrop);
+}
+
 let obsopts = {
   root: null,
   rootMargin: '0px',

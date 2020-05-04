@@ -8,6 +8,37 @@ body {
 	background-size: 20%;
 	overflow-x: hidden;
 }
+
+.pretty-scrollbar::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+	background-color: #242424;
+}
+.pretty-scrollbar::-webkit-scrollbar-corner {
+    background-color: #242424;
+}
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #00529B;
+    border-color: transparent;
+	background-clip: padding-box;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 8px;
+}
+.pretty-scrollbar::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 8px;
+	background-color: transparent;
+    border-color: #242424;
+	border-width: initial;
+}
+.pretty-scrollbar::-webkit-scrollbar-track-piece {
+    background-color: #363636;
+    border: 4px solid #242424;
+    border-radius: 8px;
+}
 @keyframes bg-scroll {
 	0% {background-position: 0px 0px}
 	100% {background-position: 17320px -10000px}
@@ -84,5 +115,59 @@ div.imgcolumn img:hover {
 	height: 40vh;
 	/* background: rgba(255,255,0,1); */
 }
-#loader.hidden {
+
+div.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background: rgba(0,0,0,0.9);
+	color: rgba(175,175,175,0);
+	font-family: Roboto;
+	font-weight: 100;
+	font-size: 2vw;
+	text-align: center;
+	padding-top: calc(50vh - 1vw);
+	animation: fade-text-in 0.5s ease-in forwards;
+}
+@keyframes fade-text-in {
+	0% {color: rgba(175,175,175,0);}
+	100% {color: rgba(175,175,175,1);}
+}
+div.backdrop img {
+	position: fixed;
+	max-width: 75vw;
+	max-height: 90vh;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%,-50%);
+	border: 2px solid #00529B;
+	background: #00529B;
+	box-shadow: 0px 0px 10px 3px #00529B;
+	animation: fade-in 0.25s ease-in forwards;
+}
+@keyframes fade-in {
+	0% {opacity: 0; transform: translate(-50%,-50%) scale(0.9);}
+	100% {opacity: 1; transform: translate(-50%,-50%) scale(1);}
+}
+div.backdrop button {
+  position: fixed;
+  top: 2vw;
+  right: 3vw;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  background: none;
+  border: none;
+  height: 40px;
+  width: 40px;
+}
+
+div.backdrop button:hover,
+div.backdrop button:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
 }
