@@ -26,7 +26,11 @@ function getViewport() {
 }
 
 function debug(txt,index) {
-	document.getElementById('debug').children[index].innerHTML = txt;
+	var dbg = document.getElementById('debug');
+	while (index > dbg.childElementCount-1) {
+		dbg.appendChild(document.createElement('text'));
+	}
+	dbg.children[index].innerHTML = txt;
 }
 
 function getSmallestImageColumn() {
@@ -71,6 +75,7 @@ function onWindowResize() {
 		jsimages.appendChild(col);
 	}
 	for (var i=0; i<ImagesList.length; i++) {
+		ImagesList[i].classList.remove('new');
 		getSmallestImageColumn().appendChild(ImagesList[i]);
 	}
 	var loader = document.createElement('div');
@@ -81,6 +86,7 @@ function onWindowResize() {
 var ImagesCount;
 window.addEventListener('resize', onWindowResize);
 window.addEventListener('load', function() {
+	document.body.children[0].focus();
 	onWindowResize();
 	var rawFile = new XMLHttpRequest();
 	rawFile.open("GET", "./images.txt", false);
@@ -116,6 +122,7 @@ function loadImage(){
 		ImagesList.push(img);
 		img.src = "./thumbs/"+(ImagesList.length-1)+".jpg";
 		img.setAttribute("onClick","showFullsize("+(ImagesList.length-1)+")")
+		img.classList.add('new');
 	}
 }
 function loadNext() {

@@ -1,12 +1,20 @@
 body {
 	padding: 0;
 	margin: 0;
+}
+.gallery {
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	background: #242424;
 	background-image: url("lion.png");
 	animation: bg-scroll 2000s linear infinite;
 	background-size: 20%;
-	overflow-x: hidden;
+	outline: 0;
 }
 
 .pretty-scrollbar::-webkit-scrollbar {
@@ -51,6 +59,7 @@ body {
 	background: white;
 	font-size: 20px;
 	z-index: 1000;
+	font-family: monospace;
 }
 
 div.header {
@@ -60,7 +69,7 @@ div.header {
 	padding-left: 1vw;
 	padding-bottom: 1vw;
 	background: #00529B;
-	border-bottom: 4px solid #00417a
+	border-bottom: 4px solid #00417a;
 }
 
 div.header div.titletext {
@@ -75,6 +84,7 @@ div.header div.titletext {
 div#jsimages {
 	display: table;
 	position: absolute;
+	width: fit-content;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -99,6 +109,13 @@ div.imgcolumn img {
 	transform: translateX(-50%);
 	border: 2px solid black;
 	background: black;
+}
+div.imgcolumn img.new {
+	animation: fade-image-in 0.2s ease-in forwards;
+}
+@keyframes fade-image-in {
+	0% {opacity: 0; transform: translate(-50%, 10px);}
+	100% {opacity: 1; transform: translate(-50%, 0px);}
 }
 div.imgcolumn img:hover {
 	border: 2px solid #00529B;
