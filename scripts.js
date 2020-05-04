@@ -145,7 +145,7 @@ function showFullsize(imgnum) {
 let obsopts = {
   root: null,
   rootMargin: '0px',
-  threshold: [0,.25,.5,.75,1]
+  threshold: 0
 }
 let observer = new IntersectionObserver(loadNext, obsopts);
 function isLoaderVisible() {
