@@ -62,6 +62,24 @@ body {
 	font-family: monospace;
 }
 
+#credits {
+	visibility: hidden;
+	padding: 0;
+}
+#credits.visible {
+	visibility: visible;
+}
+#credits div.creds {
+	color: rgba(175,175,175,1);
+	animation: pop-in 0.5s ease-in-out forwards;
+	margin-top: 50vh;
+}
+@keyframes pop-in {
+	0% {transform: translateY(-50%) scale(0);}
+	50% {transform: translateY(-50%) scale(1.2);}
+	100% {transform: translateY(-50%) scale(1);}
+}
+
 div.header {
 	width: 100vw;
 	height: 3vw;
@@ -79,6 +97,30 @@ div.header div.titletext {
 	height: 100%;
 	vertical-align: middle;
 	font-size: 2.5vw;
+	display: inline-block;
+}
+
+div.header .credits {
+	font-family: "Material Icons";
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid transparent;
+	background: transparent;
+	color: white;
+	width: fit-content;
+	border-radius: 0.5vw;
+	transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+	font-size: 2.5vw;
+	float: right;
+	margin-right: calc(16px + 2vw);
+	clear: none;
+	cursor: pointer;
+	text-shadow: 0.2vw 0.22vw 0px black;
+	outline: 0;
+}
+div.header .credits:hover {
+	border: 1px solid #242424;
+	background: #00417a;
 }
 
 div#jsimages {
@@ -169,23 +211,77 @@ div.backdrop img {
 	0% {opacity: 0; transform: translate(-50%,-50%) scale(0.9);}
 	100% {opacity: 1; transform: translate(-50%,-50%) scale(1);}
 }
-div.backdrop button {
-  position: fixed;
-  top: 2vw;
-  right: 3vw;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-  background: none;
-  border: none;
-  height: 40px;
-  width: 40px;
+div.buttonsarray button {
+	position: fixed;
+	font-family: "Material Icons Round";
+	color: #f1f1f1;
+	font-size: 5vw;
+	transition: color 0.1s linear;
+	background: none;
+	border: none;
+	height: 5vw;
+	width: 5vw;
+	padding: 0;
+	outline: none;
 }
+div.buttonsarray button.close {
+	top: 2vw;
+	right: 3vw;
+	width: 5vw;
+}
+div.buttonsarray button.share {
+	bottom: 2vw;
+	right: 3vw;
+	width: 5vw;
+}
+div.buttonsarray button.share.copied {
+	width: fit-content;
+}
+div.buttonsarray button.share.copied:before {
+	position: fixed;
+	bottom: 6vw;
+	right: -5.5vw;
+	font-family: Roboto;
+	content: "Link Copied!";
+	font-size: 1.2vw;
+	position: relative;
+}
+div.buttonsarray button.left {
+	visibility: hidden;
+	top: 50vh;
+	left: 0;
+	font-size: 6vw;
+	width: 6vw;
+	padding-top: 8vh;
+	padding-bottom: 8vh;
+	border-top-right-radius: 3vw;
+	border-bottom-right-radius: 3vw;
+	height: fit-content;
+	background: rgba(42,42,42,0.5);
+	transform: translateY(-50%);
+}
+div.buttonsarray button.right {
+	visibility: hidden;
+	top: 50vh;
+	right: 0;
+	font-size: 6vw;
+	width: 6vw;
+	padding-top: 8vh;
+	padding-bottom: 8vh;
+	border-top-left-radius: 3vw;
+	border-bottom-left-radius: 3vw;
+	height: fit-content;
+	background: rgba(42,42,42,0.5);
 
-div.backdrop button:hover,
-div.backdrop button:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
+	transform: translateY(-50%);
+}
+div.buttonsarray button.visible {
+	visibility: visible;
+}
+div.buttonsarray button:hover {
+	text-shadow: 0px 0px 20px #00529B, 0px 0px 20px #00529B;
+	cursor: pointer;
+}
+div.buttonsarray button:active {
+	text-shadow: 0px 0px 20px #00529B, 0px 0px 20px #00529B, 2px 2px 10px #00529B, 2px -2px 10px #00529B, -2px 2px 10px #00529B, -2px -2px 10px #00529B;
 }

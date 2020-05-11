@@ -102,6 +102,10 @@ window.addEventListener('load', function() {
 		}
 	}
 	rawFile.send(null);
+	var hn = window.location.hash;
+	if (hn.length > 1) {
+		showFullsize(parseInt(hn.substr(1)));
+	}
 });
 
 var ImagesList = [];
@@ -133,21 +137,101 @@ function loadNext() {
 }
 
 function showFullsize(imgnum) {
+	window.location.hash = '#'+imgnum;
 	var backdrop = document.createElement('div');
 		backdrop.classList.add('backdrop');
 		backdrop.innerHTML = "Loading...";
-		backdrop.setAttribute('onClick','this.remove();');
+		backdrop.setAttribute('onClick','window.location.hash = ""; this.remove(); document.body.children[0].focus();');
 		var img = new Image();
 			img.onload = function() {
 				backdrop.appendChild(img);
 			}
 			img.setAttribute('onClick','event.stopPropagation();');
 			img.src = "./images/"+(imgnum)+".jpg";
-		var closebutton = document.createElement('button');
-			closebutton.innerHTML = " &times; ";
-		backdrop.appendChild(closebutton);
+			img.id = "fullscreenimage";
+		var buttonsarray = document.createElement('div');
+			buttonsarray.classList.add('buttonsarray');
+			
+			var closebutton = document.createElement('button');
+				closebutton.classList.add('close');
+				closebutton.innerHTML = "close";
+			buttonsarray.appendChild(closebutton);
+			
+			var sharebutton = document.createElement('button');
+				sharebutton.classList.add('share');
+				sharebutton.id = "imgshare";
+				sharebutton.innerHTML = "share";
+				sharebutton.setAttribute('onClick','event.stopPropagation(); copyUrl()');
+			buttonsarray.appendChild(sharebutton);
+			
+			var leftbutton = document.createElement('button');
+				leftbutton.classList.add('left');
+				leftbutton.id = "imgleft";
+				leftbutton.innerHTML = "chevron_left";
+				leftbutton.setAttribute('onClick','event.stopPropagation(); jumpImage(-1);');
+			buttonsarray.appendChild(leftbutton);
+			
+			var rightbutton = document.createElement('button');
+				rightbutton.classList.add('right');
+				rightbutton.id = "imgright";
+				rightbutton.innerHTML = "chevron_right";
+				rightbutton.setAttribute('onClick','event.stopPropagation(); jumpImage(1);');
+			buttonsarray.appendChild(rightbutton);
+			
+		backdrop.appendChild(buttonsarray);
 	document.body.appendChild(backdrop);
+	updateImageArrows(imgnum);
 }
+
+function jumpImage(step) {
+	var imgnum = parseInt(window.location.hash.substr(1))+step;
+	window.location.hash = '#'+imgnum;
+	var img = document.getElementById('fullscreenimage');
+	img.remove();
+	updateImageArrows(imgnum);
+	img.src = "./images/"+(imgnum)+".jpg";
+}
+
+function updateImageArrows(imgnum) {
+	if (imgnum > 0) {
+		document.getElementById('imgleft').classList.add('visible');
+	} else {
+		document.getElementById('imgleft').classList.remove('visible');
+	}
+	if (imgnum < ImagesCount-1) {
+		document.getElementById('imgright').classList.add('visible');
+	} else {
+		document.getElementById('imgright').classList.remove('visible');
+	}
+}
+
+function copyUrl() {
+	if (navigator.share) {
+		navigator.share({
+			title: document.title,
+			text: 'Check out this picture!',
+			url: window.location.href
+		})
+		.then(() => debug('Successful share!',0))
+		.catch(err => debug(err),0);
+	} else { 
+		var dummy = document.createElement('input'),
+		text = window.location.href;
+		document.body.appendChild(dummy);
+		dummy.value = text;
+		dummy.select();
+		document.execCommand('copy');
+		document.body.removeChild(dummy);
+		var sharebtn = document.getElementById('imgshare')
+		sharebtn.classList.add('copied');
+		setTimeout(function() {sharebtn.classList.remove('copied');},2500);
+	}
+}
+
+function showCredits() {
+	document.getElementById('credits').classList.add('visible');
+}
+
 
 let obsopts = {
   root: null,
