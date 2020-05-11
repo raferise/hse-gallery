@@ -212,8 +212,8 @@ function copyUrl() {
 			text: 'Check out this picture!',
 			url: window.location.href
 		})
-		.then(() => debug('Successful share!',0))
-		.catch(err => debug(err),0);
+		.then(() => console.log("Share successful"))
+		.catch(err => console.error(err));
 	} else { 
 		var dummy = document.createElement('input'),
 		text = window.location.href;
