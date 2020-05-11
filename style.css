@@ -73,6 +73,7 @@ body {
 	color: rgba(175,175,175,1);
 	animation: pop-in 0.5s ease-in-out forwards;
 	margin-top: 50vh;
+	font-size: 4vw;
 }
 @keyframes pop-in {
 	0% {transform: translateY(-50%) scale(0);}
