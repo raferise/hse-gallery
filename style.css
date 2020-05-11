@@ -136,7 +136,6 @@ div.imgcolumn {
 	padding-top: 20px;
 	display: inline-block;
 	vertical-align: top;
-	/* outline: 1px dotted red; */
 	height: fit-content;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -236,7 +235,7 @@ div.buttonsarray button.share {
 	width: 5vw;
 }
 div.buttonsarray button.share.copied {
-	width: fit-content;
+	width: auto;
 }
 div.buttonsarray button.share.copied:before {
 	position: fixed;
@@ -257,7 +256,7 @@ div.buttonsarray button.left {
 	padding-bottom: 8vh;
 	border-top-right-radius: 3vw;
 	border-bottom-right-radius: 3vw;
-	height: fit-content;
+	height: auto;
 	background: rgba(42,42,42,0.5);
 	transform: translateY(-50%);
 }
@@ -271,7 +270,7 @@ div.buttonsarray button.right {
 	padding-bottom: 8vh;
 	border-top-left-radius: 3vw;
 	border-bottom-left-radius: 3vw;
-	height: fit-content;
+	height: auto;
 	background: rgba(42,42,42,0.5);
 
 	transform: translateY(-50%);
