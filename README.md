@@ -1,4 +1,4 @@
-# HSE Gallery - It's a gallery, people
+# [HSE Gallery](https://infinitymeme.github.io/hse-gallery)
 ## Requirements to upload images
 You need:
 * Python (lots of versions should work I think, I used 3.8)
