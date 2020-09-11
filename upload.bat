@@ -12,6 +12,6 @@ FOR /F "tokens=*" %%h IN ('dir .\upload /B /ON') do (
 )
 echo %i%>images.txt
 echo Files moved and renamed. %s% %i%
-python thumbs.py %s% %i%
+py thumbs.py %s% %i%
 endlocal
 pause
