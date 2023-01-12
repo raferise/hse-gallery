@@ -125,7 +125,7 @@ div.header .credits:hover {
 }
 
 div#jsimages {
-	display: table;
+	display: flex;
 	position: absolute;
 	width: fit-content;
 	left: 50%;
